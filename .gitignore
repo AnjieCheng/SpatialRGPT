@@ -1,0 +1,52 @@
+*.whl
+*_dev
+8b
+dev/
+config.json
+eval_output/
+eval-result/
+hostfile
+core.*
+*.out
+captioner_bk/
+slurm-scripts/
+slurm-logs/
+captioner/
+hostfile
+*_dev.py
+*_dev.sh
+*.ipynb
+
+
+# Python
+__pycache__
+*.pyc
+*.egg-info
+dist
+
+# Log
+*.log
+*.log.*
+*.json
+
+# Data
+!**/alpaca-data-conversation.json
+
+# Editor
+.idea
+*.swp
+
+# Other
+.DS_Store
+wandb
+output
+
+runs
+checkpoints
+checkpoints_bak
+ckpts*
+
+*.pt
+
+playground
+*/visualization/*

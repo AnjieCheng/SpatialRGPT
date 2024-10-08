@@ -1,0 +1,35 @@
+Example 1:
+Question: {question}
+Answer: Yes, Region [0] is wider than Region [1].
+Response: Indeed, Region [0] has a greater width compared to Region [1].
+"your_mark": 1
+
+Example 2:
+Question: {question}
+Answer: Correct, the width of Region [0] exceeds that of Region [1].
+Response: Yes, Region [0] is wider than Region [1].
+"your_mark": 1
+
+Example 3:
+Question: {question}
+Answer: Indeed, Region [0] has a greater width compared to Region [1].
+Response: In fact, Region [0] might be narrower than Region [1].
+"your_mark": 0
+
+Example 4:
+Question: {question}
+Answer: No, Region [0] is not wider than Region [1].
+Response: Yes, Region [0] is wider than Region [1].
+"your_mark": 0
+
+Example 5:
+Question: {question}
+Answer: No, Region [0] is not wider than Region [1].
+Response: In fact, Region [0] might be narrower than Region [1].
+"your_mark": 1
+
+Example 6:
+Question: {question}
+Answer: In fact, Region [0] might be narrower than Region [1].
+Response: Incorrect, Region [0]'s width does not surpass Region [1]'s.
+"your_mark": 1

@@ -1,0 +1,29 @@
+Example 1:
+Question: {question}
+Answer: Yes, Region [0] is above Region [1].
+Response: Indeed, Region [0] is positioned over Region [1].
+"your_mark": 1
+
+Example 2:
+Question: {question}
+Answer: Correct, Region [0] is located above Region [1].
+Response: Yes, Region [0] is above Region [1].
+"your_mark": 1
+
+Example 3:
+Question: {question}
+Answer: Indeed, Region [0] is positioned over Region [1].
+Response: Actually, Region [0] is below Region [1].
+"your_mark": 0
+
+Example 4:
+Question: {question}
+Answer: Incorrect, Region [0] is not positioned above Region [1].
+Response: Yes, Region [0] is above Region [1].
+"your_mark": 0
+
+Example 5:
+Question: {question}
+Answer: Incorrect, Region [0] is not positioned above Region [1].
+Response: Actually, Region [0] is below Region [1].
+"your_mark": 1

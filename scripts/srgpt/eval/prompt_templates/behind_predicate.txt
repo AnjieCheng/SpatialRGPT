@@ -1,0 +1,35 @@
+Example 1:
+Question: {question}
+Answer: Yes, it is.
+Response: Yes, Region [0] is further from the viewer.
+"your_mark": 1
+
+Example 2:
+Question: {question}
+Answer: Yes, it is behind Region [1].
+Response: Yes, Region [0] is behind Region [1].
+"your_mark": 1
+
+Example 3:
+Question: {question}
+Answer: That is True.
+Response: No, Region [0] is closer to the viewer.
+"your_mark": 0
+
+Example 4:
+Question: {question}
+Answer: No, Region [1] is in front of Region [0].
+Response: Yes, it is behind Region [1].
+"your_mark": 0
+
+Example 5:
+Question: {question}
+Answer: That is False.
+Response: No, it is in front of Region [1].
+"your_mark": 1
+
+Example 6:
+Question: {question}
+Answer: No, Region [1] is in front of Region [0].
+Response: No, Region [0] is closer to the viewer.
+"your_mark": 1

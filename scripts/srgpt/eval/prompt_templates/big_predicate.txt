@@ -1,0 +1,35 @@
+Example 1:
+Question: {question}
+Answer: Yes, Region [0] is bigger than Region [1].
+Response: Indeed, Region [0] has a larger size compared to Region [1].
+"your_mark": 1
+
+Example 2:
+Question: {question}
+Answer: Correct, Region [0] is larger in size than Region [1].
+Response: Yes, Region [0] is bigger than Region [1].
+"your_mark": 1
+
+Example 3:
+Question: {question}
+Answer: Indeed, Region [0] has a larger size compared to Region [1].
+Response: Actually, Region [0] might be smaller than Region [1].
+"your_mark": 0
+
+Example 4:
+Question: {question}
+Answer: No, Region [0] is not bigger than Region [1].
+Response: Yes, Region [0] is bigger than Region [1].
+"your_mark": 0
+
+Example 5:
+Question: {question}
+Answer: No, Region [0] is not bigger than Region [1].
+Response: Actually, Region [0] might be smaller than Region [1].
+"your_mark": 1
+
+Example 6:
+Question: {question}
+Answer: Actually, Region [0] might be smaller than Region [1].
+Response: Incorrect, Region [0] is not larger than Region [1].
+"your_mark": 1

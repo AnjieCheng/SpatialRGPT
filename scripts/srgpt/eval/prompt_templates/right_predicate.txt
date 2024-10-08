@@ -1,0 +1,29 @@
+Example 1:
+Question: {question}
+Answer: Yes, Region [0] is to the right of Region [1].
+Response: Indeed, Region [0] is positioned on the right side of Region [1].
+"your_mark": 1
+
+Example 2:
+Question: {question}
+Answer: Correct, you'll find Region [0] to the right of Region [1].
+Response: Yes, Region [0] is to the right of Region [1].
+"your_mark": 1
+
+Example 3:
+Question: {question}
+Answer: Indeed, Region [0] is positioned on the right side of Region [1].
+Response: In fact, Region [0] is to the left of Region [1].
+"your_mark": 0
+
+Example 4:
+Question: {question}
+Answer: Incorrect, Region [0] is not on the right side of Region [1].
+Response: Correct, you'll find Region [0] to the right of Region [1].
+"your_mark": 0
+
+Example 5:
+Question: {question}
+Answer: Incorrect, Region [0] is not on the right side of Region [1].
+Response: In fact, Region [0] is to the left of Region [1].
+"your_mark": 1

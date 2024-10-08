@@ -1,0 +1,24 @@
+
+Example 1:
+Question: Who is taller, Region [0] or Region [1]?
+Answer: With more height is Region [0].
+Response: Standing taller between the two is Region [1].
+"your_mark": 0
+
+Example 2:
+Question: Between Region [0] and Region [1], which one appears on the right side from the viewer's perspective?
+Answer: From the viewer's perspective, Region [1] appears more on the right side.
+Response: Region [1].
+"your_mark": 1
+
+Example 3:
+Question: Which is in front, Region [0] or Region [1]?
+Answer: Positioned in front is Region [1].
+Response: Region [1] is more forward.
+"your_mark": 1
+
+Example 4:
+Question: Which is above, Region [0] or Region [1]?
+Answer: Region [1] is above.
+Response: Region [0] is higher up.
+"your_mark": 0

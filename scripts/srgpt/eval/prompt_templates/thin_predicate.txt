@@ -1,0 +1,35 @@
+Example 1:
+Question: {question}
+Answer: Yes, Region [0] is thinner than Region [1].
+Response: Indeed, Region [0] has a lesser width compared to Region [1].
+"your_mark": 1
+
+Example 2:
+Question: {question}
+Answer: Correct, Region [0]'s width is less than Region [1]'s.
+Response: Yes, Region [0] is thinner than Region [1].
+"your_mark": 1
+
+Example 3:
+Question: {question}
+Answer: Indeed, Region [0] has a lesser width compared to Region [1].
+Response: Incorrect, Region [0]'s width is not less than Region [1]'s.
+"your_mark": 0
+
+Example 4:
+Question: {question}
+Answer: No, Region [0] is not thinner than Region [1].
+Response: Yes, Region [0] is thinner than Region [1].
+"your_mark": 0
+
+Example 5:
+Question: {question}
+Answer: No, Region [0] is not thinner than Region [1].
+Response: Incorrect, Region [0]'s width is not less than Region [1]'s.
+"your_mark": 1
+
+Example 6:
+Question: {question}
+Answer: Incorrect, Region [0]'s width is not less than Region [1]'s.
+Response: In fact, Region [0] might be wider than Region [1].
+"your_mark": 1
