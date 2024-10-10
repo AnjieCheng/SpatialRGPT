@@ -17,7 +17,7 @@ from osdsynth.processor.prompt import PromptGenerator
 
 # from osdsynth.processor.filter import FilterImage
 from osdsynth.processor.segment import SegmentImage
-from osdsynth.utils.logger import SkipImageException, setup_logger
+from osdsynth.utils.logger import SkipImageException, save_detection_list_to_json, setup_logger
 from PIL import Image
 from tqdm import tqdm
 
@@ -52,13 +52,9 @@ def main(args):
     cfg.exp_dir = os.path.join(args.output_dir, exp_name)
     os.makedirs(os.path.abspath(cfg.exp_dir), exist_ok=True)
 
-    # Create folder for output npz
-    cfg.npz_folder = os.path.join(cfg.exp_dir, "npz")
-    os.makedirs(os.path.abspath(cfg.npz_folder), exist_ok=True)
-
-    # Create folder for output npz
-    cfg.pickle_folder = os.path.join(cfg.exp_dir, "pickle")
-    os.makedirs(os.path.abspath(cfg.pickle_folder), exist_ok=True)
+    # Create folder for output json
+    cfg.json_folder = os.path.join(cfg.exp_dir, "json")
+    os.makedirs(os.path.abspath(cfg.json_folder), exist_ok=True)
 
     global_data = glob.glob(f"{args.input}/*.jpg") + glob.glob(f"{args.input}/*.png")
     device = "cuda"
@@ -96,6 +92,10 @@ def annotate(cfg, global_data, logger, device):
 
             # Get LLaVA local caption for each region, however, currently just use a <region> placeholder
             detection_list = captioner.process_local_caption(detection_list)
+
+            # Save detection list to json
+            detection_list_path = os.path.join(cfg.json_folder, f"{filename}.json")
+            save_detection_list_to_json(detection_list, detection_list_path)
 
             # Generate QAs based on templates
             vqa_results = prompter.evaluate_predicates_on_pairs(detection_list)

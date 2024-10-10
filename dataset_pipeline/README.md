@@ -33,7 +33,7 @@ pip install mmcv==2.0.0 -f https://download.openmmlab.com/mmcv/dist/cu116/torch1
 #### Install Grounded-SAM package
 
 ```
-cd osdsynth/external
+mkdir external && cd osdsynth/external
 git clone https://github.com/IDEA-Research/Grounded-Segment-Anything.git
 ```
 
@@ -50,8 +50,28 @@ git clone https://github.com/jinlinyi/PerspectiveFields.git
 #### Download Weights
 
 ```sh
-sh dataset_pipeline/scripts/download_all_weights.sh
+cd ../ # navigate back to dataset_pipeline folder
+sh ./scripts/download_all_weights.sh
 ```
+
+### Inference
+
+To specify the folder containing the images for testing, use the `--input` argument. You can also adjust the settings in `configs/v2.py` to better suit your images, like modifying the SAM thresholds or tweaking the DBSCAN hyperparameters.
+
+```sh
+python run.py --config configs/v2.py --input PATH_TO_INPUT --vis
+```
+
+The results are saved in two formats. One is in JSON, where the Open3D bounding boxes are serialized. If you'd like to recreate the Open3D bounding box object for each detection, you can use the following code:
+
+```python
+bbox = o3d.geometry.AxisAlignedBoundingBox(
+    min_bound=bbox_dict["min_bound"],
+    max_bound=bbox_dict["max_bound"]
+)
+```
+
+The other format is compatible with Wis3D point clouds. You can use the instructions below to visualize these results.
 
 ### Wis3D Visualization
 

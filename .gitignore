@@ -50,3 +50,6 @@ ckpts*
 
 playground
 */visualization/*
+
+demo_out
+dataset_pipeline/osdsynth/external/*

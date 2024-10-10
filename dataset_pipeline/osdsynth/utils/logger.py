@@ -1,13 +1,66 @@
 import atexit
+import json
 import logging
 import os
 import sys
 
+import numpy as np
+import open3d as o3d
 from termcolor import colored
 
 __all__ = [
     "setup_logger",
 ]
+
+
+def save_detection_list_to_json(detection_list, output_file):
+    def serialize_numpy(obj):
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        return obj
+
+    def serialize_open3d(obj):
+        if isinstance(obj, o3d.geometry.AxisAlignedBoundingBox):
+            return {
+                "type": "AxisAlignedBoundingBox",
+                "min_bound": obj.min_bound.tolist(),
+                "max_bound": obj.max_bound.tolist(),
+            }
+        elif isinstance(obj, o3d.geometry.OrientedBoundingBox):
+            return {
+                "type": "OrientedBoundingBox",
+                "center": obj.center.tolist(),
+                "extent": obj.extent.tolist(),
+                "R": obj.R.tolist(),
+            }
+        elif isinstance(obj, o3d.geometry.PointCloud):
+            return {
+                "type": "PointCloud",
+                "points": np.asarray(obj.points).tolist(),
+                "colors": np.asarray(obj.colors).tolist() if obj.has_colors() else None,
+                "normals": np.asarray(obj.normals).tolist() if obj.has_normals() else None,
+            }
+        return obj
+
+    def serialize_detection(detection):
+        serialized = {}
+        for key, value in detection.items():
+            if key in ["axis_aligned_bbox", "oriented_bbox", "pcd"]:
+                serialized[key] = serialize_open3d(value)
+            elif isinstance(value, np.ndarray):
+                serialized[key] = serialize_numpy(value)
+            elif isinstance(value, (list, dict, str, int, float, bool, type(None))):
+                serialized[key] = value
+            else:
+                serialized[key] = str(value)  # Convert other types to string
+        return serialized
+
+    serialized_list = [serialize_detection(detection) for detection in detection_list]
+
+    with open(output_file, "w") as f:
+        json.dump(serialized_list, f, indent=2)
+
+    print(f"Detection list saved to {output_file}")
 
 
 class SkipImageException(Exception):
