@@ -59,6 +59,9 @@ class SegmentImage:
         # Tag2Text
         classes = run_tagging_model(self.cfg, img_tagging, self.tagging_model)
 
+        if len(classes) == 0:
+            raise SkipImageException("No foreground objects detected by tagging model.")
+
         # Using GroundingDINO to detect and SAM to segment
         detections = self.grounding_dino_model.predict_with_classes(
             image=image_bgr,  # This function expects a BGR image...
