@@ -115,12 +115,12 @@ class PointCloudReconstruction:
             detections_list[obj_idx]["axis_aligned_bbox"] = axis_aligned_bbox
             detections_list[obj_idx]["oriented_bbox"] = oriented_bbox
 
-            # Filter detections to include only those with a 'pcd' key
-            filtered_detections = [det for det in detections_list if "pcd" in det]
+        # Filter detections to include only those with a 'pcd' key
+        filtered_detections = [det for det in detections_list if "pcd" in det]
 
-            instance_colored_pcds = color_by_instance([det["pcd"] for det in filtered_detections])
-            axis_aligned_bbox = [det["axis_aligned_bbox"] for det in filtered_detections]
-            oriented_bboxes = [det["oriented_bbox"] for det in filtered_detections]
+        instance_colored_pcds = color_by_instance([det["pcd"] for det in filtered_detections])
+        axis_aligned_bbox = [det["axis_aligned_bbox"] for det in filtered_detections]
+        oriented_bboxes = [det["oriented_bbox"] for det in filtered_detections]
 
         if self.vis:
             obj_id = 0
