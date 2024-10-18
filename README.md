@@ -36,6 +36,7 @@ To build environment for training SpatialRGPT, please run the following:
 
 ```bash
 ./environment_setup.sh srgpt
+conda activate srgpt
 ```
 
 ______________________________________________________________________
@@ -48,9 +49,12 @@ To run the Gradio demo for SpatialRGPT, please follow these steps. Due to `pydan
 
    ```bash
    ./environment_setup.sh srgpt-demo
+   conda activate srgpt-demo
    pip install gradio==4.27 deepspeed==0.13.0 gradio_box_promptable_image segment_anything_hq
    pip install -U 'git+https://github.com/facebookresearch/detectron2.git@ff53992b1985b63bd3262b5a36167098e3dada02'
    ```
+
+   If you run into an error with the detectron2 installation, it could be because `CUDA_HOME` is not set. To fix this, export `CUDA_HOME` to your local CUDA path. See details in [this issue](https://github.com/AnjieCheng/SpatialRGPT/issues/6).
 
 1. Clone the Depth-Anything repository and download the necessary checkpoint:
 
