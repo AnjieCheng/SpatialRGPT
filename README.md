@@ -6,6 +6,8 @@
 
 [![Code License](https://img.shields.io/badge/Code%20License-Apache_2.0-green.svg)](CODE_LICENSE)
 [![Model License](https://img.shields.io/badge/Model%20License-Apache_2.0-green.svg)](MODEL_LICENSE)
+![Data License](https://img.shields.io/badge/Data%20License-Apache_2.0-green.svg)
+![Benchmark License](https://img.shields.io/badge/Benchmark%20License-Apache_2.0-green.svg)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/release/python-3100/)
 
 [arxiv](https://arxiv.org/abs/2406.01584) / [Huggingface](https://huggingface.co/collections/a8cheng/spatialrgpt-66fef10465966adc81819723)
