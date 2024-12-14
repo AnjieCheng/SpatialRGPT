@@ -95,4 +95,4 @@ wid3d_interval = 1
 
 use_clip = False
 
-perspective_model_variant = "perspective_fields"
+perspective_model_variant = "geo_calib"

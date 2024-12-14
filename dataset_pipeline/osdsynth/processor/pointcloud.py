@@ -29,7 +29,16 @@ class PointCloudReconstruction:
 
         if init_models:
             # Initialize the perspective_fields_model
-            self.perspective_fields_model = get_perspective_fields_model(cfg, device)
+            if self.cfg.perspective_model_variant == "perspective_fields":
+                print(f"Using Perspective Fields")
+                self.perspective_fields_model = get_perspective_fields_model(cfg, device)
+            elif self.cfg.perspective_model_variant == "geo_calib":
+                from geocalib import GeoCalib
+
+                print(f"Using Geo Calib")
+                self.perspective_fields_model = GeoCalib(weights="distorted").to(device)
+            else:
+                raise ValueError(f"perspective_model_variant: {self.cfg.perspective_model_variant} not implemented")
 
             # Initialize the Camera Intrinsics Model
             self.wilde_camera_model = torch.hub.load("ShngJZ/WildCamera", "WildCamera", pretrained=True).to(device)
@@ -45,16 +54,27 @@ class PointCloudReconstruction:
         image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
         image_rgb_pil = Image.fromarray(image_rgb)
 
-        # Run Perspective Fields, this returns the pitch, roll
-        (
-            vis_perspective_fields,
-            perspective_fields,
-        ) = run_perspective_fields_model(self.perspective_fields_model, image_bgr)
+        if self.cfg.perspective_model_variant == "perspective_fields":
+            # Run Perspective Fields, this returns the pitch, roll
+            (
+                vis_perspective_fields,
+                perspective_fields,
+            ) = run_perspective_fields_model(self.perspective_fields_model, image_bgr)
+            roll, pitch = perspective_fields["roll"], perspective_fields["pitch"]
 
-        # Perspective Fields to Rotation Matrix
+        elif self.cfg.perspective_model_variant == "geo_calib":
+            from geocalib.utils import rad2deg
+
+            # load image as tensor in range [0, 1] with shape [C, H, W]
+            image_geo = torch.tensor((image_rgb.transpose((2, 0, 1))) / 255.0, dtype=torch.float).to(self.device)
+            geo_results = self.perspective_fields_model.calibrate(image_geo, camera_model="simple_radial")
+            roll, pitch = rad2deg(geo_results["gravity"].rp).unbind(-1)
+            roll, pitch = roll.item(), pitch.item()
+
+        # Perspective to Rotation Matrix
         perspective_R = create_rotation_matrix(
-            roll=perspective_fields["roll"],
-            pitch=perspective_fields["pitch"],
+            roll=roll,
+            pitch=pitch,
             yaw=0,
             degrees=True,
         )
@@ -79,7 +99,7 @@ class PointCloudReconstruction:
 
         if self.vis:
             wis3d = Wis3D(self.cfg.wis3d_folder, filename)
-            # wis3d.add_point_cloud(vertices=pts3d.reshape((-1, 3)), colors=image_rgb.reshape(-1, 3), name="pts3d")
+            wis3d.add_point_cloud(vertices=pts3d.reshape((-1, 3)), colors=image_rgb.reshape(-1, 3), name="pts3d")
             wis3d.add_point_cloud(
                 vertices=cano_pts3d.reshape((-1, 3)), colors=image_rgb.reshape(-1, 3), name="cano_pts3d"
             )
